@@ -5,6 +5,7 @@
 import std.core;
 import std.memory;
 #	else
+#		include <iostream>
 #		include <memory>
 #		include <string>
 #	endif

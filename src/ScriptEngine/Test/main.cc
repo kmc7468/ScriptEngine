@@ -8,10 +8,10 @@ import std.core;
 
 int main()
 {
-	ScriptEngine::Engine e;
-	e.name("asdf");
-
-	std::cout << e.name() << std::endl;
+	auto engine = ScriptEngine::make_engine();
+	engine->name("Test");
+	
+	engine->dump();
 
 	return 0;
 }

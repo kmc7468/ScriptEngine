@@ -22,6 +22,13 @@ public:
 	bool operator!=(const Engine& engine) const = delete;
 
 public:
+	static Ptr make();
+
+public:
+	void dump() const;
+	void dump(std::ostream& out) const;
+
+public:
 	std::string name() const;
 	std::string name(const std::string& new_name);
 
@@ -30,6 +37,8 @@ private:
 };
 
 using EnginePtr = Engine::Ptr;
+
+EnginePtr make_engine();
 
 SCRIPTENGINE_END
 
