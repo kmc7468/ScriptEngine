@@ -3,7 +3,9 @@
 
 #	ifdef SCRIPTENGINE_MODULE
 import std.core;
+import std.memory;
 #	else
+#		include <memory>
 #		include <string>
 #	endif
 

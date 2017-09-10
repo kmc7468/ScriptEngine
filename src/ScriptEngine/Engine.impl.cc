@@ -8,6 +8,11 @@ import ScriptEngine.Engine;
 
 namespace ScriptEngine
 {
+	Engine::Engine()
+	{}
+	Engine::~Engine()
+	{}
+
 	std::string Engine::name() const
 	{
 		return name_;
