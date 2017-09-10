@@ -1,0 +1,17 @@
+#ifndef SCRIPTENGINE_HEADER_CONFIG_HH
+#	define SCRIPTENGINE_HEADER_CONFIG_HH
+
+#	ifdef SCRIPTENGINE_MODULE
+#		define SCRIPTENGINE_EXPORT export
+#	else
+#		define SCRIPTENGINE_EXPORT
+#	endif
+
+#	define SCRIPTENGINE_BEGIN				\
+SCRIPTENGINE_EXPORT namespace ScriptEngine	\
+{
+
+#	define SCRIPTENGINE_END					\
+}
+
+#endif
