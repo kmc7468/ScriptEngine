@@ -2,9 +2,13 @@
 #	define SCRIPTENGINE_HEADER_DETAILS_ENGINE_INCLUDE_HH
 
 #	ifdef SCRIPTENGINE_MODULE
+import ScriptEngine.LexerEngine;
+
 import std.core;
 import std.memory;
 #	else
+#		include <ScriptEngine/LexerEngine.hh>
+
 #		include <iostream>
 #		include <memory>
 #		include <string>

@@ -11,9 +11,10 @@ namespace se = ScriptEngine;
 int main()
 {
 	auto engine = se::make_engine();
-	engine->name("Test");
-	
+	engine->name = "Test";
 	engine->dump();
+
+	auto lexer_engine = se::make_lexer_engine();
 
 	auto tokentype = se::TokenType::make()
 		["none"]["identifier"]["integer"]["string"];

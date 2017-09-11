@@ -31,16 +31,7 @@ namespace ScriptEngine
 
 		out << "Engine:\n";
 
-		out << prefix(1) << "Name: " << name_ << '\n';
-	}
-
-	std::string Engine::name() const
-	{
-		return name_;
-	}
-	std::string Engine::name(const std::string& new_name)
-	{
-		return name_ = new_name;
+		out << prefix(1) << "Name: " << name << '\n';
 	}
 
 	EnginePtr make_engine()

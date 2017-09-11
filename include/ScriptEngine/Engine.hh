@@ -29,11 +29,9 @@ public:
 	void dump(std::ostream& out) const;
 
 public:
-	std::string name() const;
-	std::string name(const std::string& new_name);
+	LexerEnginePtr lexer_engine = nullptr;
 
-private:
-	std::string name_;
+	std::string name;
 };
 
 using EnginePtr = Engine::Ptr;

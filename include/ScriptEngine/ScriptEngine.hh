@@ -2,6 +2,7 @@
 #	define SCRIPTENGINE_HEADER_SCRIPTENGINE_HH
 
 #	include <ScriptEngine/Engine.hh>
+#	include <ScriptEngine/LexerEngine.hh>
 #	include <ScriptEngine/Token.hh>
 
 #endif
