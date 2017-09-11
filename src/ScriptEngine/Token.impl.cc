@@ -82,6 +82,25 @@ namespace ScriptEngine
 		return TokenType();
 	}
 
+	void TokenType::dump() const
+	{
+		dump(std::cout);
+	}
+	void TokenType::dump(std::ostream& out) const
+	{
+		static auto prefix = [](int depth)
+		{
+			return std::string(depth * 4, ' ');
+		};
+
+		out << "TokenType:\n";
+	
+		for (const std::string& member : members_)
+		{
+			out << prefix(1) << member << '\n';
+		}
+	}
+
 	void TokenType::push_back(const std::string& new_member)
 	{
 		std::vector<std::string>::iterator member_iter =

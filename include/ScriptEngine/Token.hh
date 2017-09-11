@@ -34,6 +34,9 @@ public:
 	static TokenType make();
 
 public:
+	void dump() const;
+	void dump(std::ostream& out) const;
+
 	void push_back(const std::string& new_member);
 	void erase(const std::string& member);
 	bool find(const std::string& member) const;

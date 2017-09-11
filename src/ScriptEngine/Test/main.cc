@@ -18,11 +18,7 @@ int main()
 
 	auto tokentype = se::TokenType::make()
 		["none"]["identifier"]["integer"]["string"];
-
-	for (const auto& a : tokentype)
-	{
-		std::cout << a << std::endl;
-	}
+	tokentype.dump();
 
 	return 0;
 }

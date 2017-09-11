@@ -4,6 +4,7 @@
 #	ifdef SCRIPTENGINE_MODULE
 import std.core;
 #	else
+#		include <iostream>
 #		include <string>
 #		include <vector>
 #	endif
