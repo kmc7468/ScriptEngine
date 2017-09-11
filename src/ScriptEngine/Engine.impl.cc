@@ -18,20 +18,20 @@ namespace ScriptEngine
 		return std::make_shared<Engine>();
 	}
 
-	void Engine::dump() const
+	void Engine::dump(int depth) const
 	{
 		dump(std::cout);
 	}
-	void Engine::dump(std::ostream& out) const
+	void Engine::dump(std::ostream& out, int depth) const
 	{
 		static auto prefix = [](int depth)
 		{
 			return std::string(depth * 4, ' ');
 		};
 
-		out << "Engine:\n";
+		out << prefix(depth) << "Engine:\n";
 
-		out << prefix(1) << "Name: " << name << '\n';
+		out << prefix(depth + 1) << "Name: " << name << '\n';
 	}
 
 	EnginePtr make_engine()

@@ -25,8 +25,8 @@ public:
 	static Ptr make();
 
 public:
-	void dump() const;
-	void dump(std::ostream& out) const;
+	void dump(int depth = 0) const;
+	void dump(std::ostream& out, int depth = 0) const;
 
 public:
 	LexerEnginePtr lexer_engine = nullptr;

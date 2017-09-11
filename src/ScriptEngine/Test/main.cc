@@ -15,10 +15,9 @@ int main()
 	engine->dump();
 
 	auto lexer_engine = se::make_lexer_engine();
-
-	auto tokentype = se::TokenType::make()
+	lexer_engine->token_type = se::TokenType::make()
 		["none"]["identifier"]["integer"]["string"];
-	tokentype.dump();
+	lexer_engine->dump();
 
 	return 0;
 }

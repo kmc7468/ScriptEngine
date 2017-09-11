@@ -23,6 +23,13 @@ public:
 
 public:
 	static Ptr make();
+
+public:
+	void dump(int depth = 0) const;
+	void dump(std::ostream& out, int depth = 0) const;
+
+public:
+	TokenType token_type;
 };
 
 using LexerEnginePtr = LexerEngine::Ptr;

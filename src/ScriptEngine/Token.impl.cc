@@ -82,22 +82,22 @@ namespace ScriptEngine
 		return TokenType();
 	}
 
-	void TokenType::dump() const
+	void TokenType::dump(int depth) const
 	{
-		dump(std::cout);
+		dump(std::cout, depth);
 	}
-	void TokenType::dump(std::ostream& out) const
+	void TokenType::dump(std::ostream& out, int depth) const
 	{
 		static auto prefix = [](int depth)
 		{
 			return std::string(depth * 4, ' ');
 		};
 
-		out << "TokenType:\n";
+		out << prefix(depth) << "TokenType:\n";
 	
 		for (const std::string& member : members_)
 		{
-			out << prefix(1) << member << '\n';
+			out << prefix(depth + 1) << member << '\n';
 		}
 	}
 
