@@ -6,9 +6,11 @@ import std.core;
 #	include <iostream>
 #endif
 
+namespace se = ScriptEngine;
+
 int main()
 {
-	auto engine = ScriptEngine::make_engine();
+	auto engine = se::make_engine();
 	engine->name("Test");
 	
 	engine->dump();
