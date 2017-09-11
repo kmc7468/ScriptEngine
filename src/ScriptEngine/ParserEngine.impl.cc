@@ -18,9 +18,17 @@ namespace ScriptEngine
 		return std::make_shared<ParserEngine>();
 	}
 
+	void ParserEngine::dump() const
+	{
+		dump(std::cout);
+	}
 	void ParserEngine::dump(int depth) const
 	{
 		dump(std::cout, depth);
+	}
+	void ParserEngine::dump(std::ostream& out) const
+	{
+		dump(out, 0);
 	}
 	void ParserEngine::dump(std::ostream& out, int depth) const
 	{

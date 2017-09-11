@@ -82,9 +82,17 @@ namespace ScriptEngine
 		return TokenType();
 	}
 
+	void TokenType::dump() const
+	{
+		dump(std::cout);
+	}
 	void TokenType::dump(int depth) const
 	{
 		dump(std::cout, depth);
+	}
+	void TokenType::dump(std::ostream& out) const
+	{
+		dump(out, 0);
 	}
 	void TokenType::dump(std::ostream& out, int depth) const
 	{

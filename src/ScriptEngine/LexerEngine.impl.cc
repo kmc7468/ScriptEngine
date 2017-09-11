@@ -18,9 +18,17 @@ namespace ScriptEngine
 		return std::make_shared<LexerEngine>();
 	}
 
+	void LexerEngine::dump() const
+	{
+		dump(std::cout);
+	}
 	void LexerEngine::dump(int depth) const
 	{
 		dump(std::cout, depth);
+	}
+	void LexerEngine::dump(std::ostream& out) const
+	{
+		dump(out, 0);
 	}
 	void LexerEngine::dump(std::ostream& out, int depth) const
 	{

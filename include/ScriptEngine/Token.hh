@@ -34,8 +34,10 @@ public:
 	static TokenType make();
 
 public:
-	void dump(int depth = 0) const;
-	void dump(std::ostream& out, int depth = 0) const;
+	void dump() const;
+	void dump(int depth) const;
+	void dump(std::ostream& out) const;
+	void dump(std::ostream& out, int depth) const;
 
 	void push_back(const std::string& new_member);
 	void erase(const std::string& member);
