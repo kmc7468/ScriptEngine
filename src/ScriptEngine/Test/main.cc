@@ -15,5 +15,13 @@ int main()
 	
 	engine->dump();
 
+	auto tokentype = se::TokenType::make()
+		["none"]["identifier"]["integer"]["string"];
+
+	for (const auto& a : tokentype)
+	{
+		std::cout << a << std::endl;
+	}
+
 	return 0;
 }
