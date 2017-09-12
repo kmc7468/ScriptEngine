@@ -57,6 +57,8 @@ private:
 	std::vector<std::string> members_;
 };
 
+TokenType make_token_type();
+
 SCRIPTENGINE_END
 
 #	endif

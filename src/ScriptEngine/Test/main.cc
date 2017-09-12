@@ -10,7 +10,7 @@ namespace se = ScriptEngine;
 
 int main()
 {
-	auto token_type = se::TokenType::make()
+	auto token_type = se::make_token_type()
 		["none"]["identifier"]["integer"]["string"];
 
 	auto engine = se::make_engine();

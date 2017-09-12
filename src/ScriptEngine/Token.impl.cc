@@ -170,4 +170,9 @@ namespace ScriptEngine
 	{
 		return members_.size() == 0;
 	}
+
+	TokenType make_token_type()
+	{
+		return TokenType::make();
+	}
 }
