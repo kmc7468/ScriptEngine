@@ -39,7 +39,7 @@ namespace ScriptEngine
 
 		out << prefix(depth) << "ParserEngine:\n";
 
-		out << prefix(depth + 1) << "Name: " << name << '\n';
+		token_type.dump(depth + 1);
 	}
 
 	ParserEnginePtr make_parser_engine()

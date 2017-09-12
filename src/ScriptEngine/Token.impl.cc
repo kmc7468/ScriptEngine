@@ -101,6 +101,13 @@ namespace ScriptEngine
 			return std::string(depth * 4, ' ');
 		};
 
+		if (empty())
+		{
+			out << prefix(depth) + "TokenType: empty\n";
+
+			return;
+		}
+
 		out << prefix(depth) << "TokenType:\n";
 	
 		for (const std::string& member : members_)

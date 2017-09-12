@@ -31,9 +31,7 @@ public:
 	void dump(std::ostream& out, int depth) const;
 
 public:
-	LexerEnginePtr lexer_engine = nullptr;
-
-	std::string name;
+	TokenType token_type;
 };
 
 using ParserEnginePtr = ParserEngine::Ptr;
