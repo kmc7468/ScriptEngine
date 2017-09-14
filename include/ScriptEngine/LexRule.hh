@@ -2,7 +2,7 @@
 #	ifndef SCRIPTENGINE_HEADER_LEXRULE_HH
 #		define SCRIPTENGINE_HEADER_LEXRULE_HH
 #		include <ScriptEngine/Config.hh>
-#		include <ScriptEngine/LexRule.hh>
+#		include <ScriptEngine/Details/LexRule.include.hh>
 
 SCRIPTENGINE_BEGIN
 
