@@ -31,7 +31,11 @@ public:
 	void dump(std::ostream& out, int depth) const;
 
 public:
-	TokenType token_type;
+	TokenType token_type() const;
+	TokenType token_type(const TokenType& token_type);
+
+private:
+	TokenType token_type_;
 };
 
 using ParserEnginePtr = ParserEngine::Ptr;

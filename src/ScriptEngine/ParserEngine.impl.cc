@@ -39,7 +39,16 @@ namespace ScriptEngine
 
 		out << prefix(depth) << "ParserEngine:\n";
 
-		token_type.dump(depth + 1);
+		token_type_.dump(depth + 1);
+	}
+
+	TokenType ParserEngine::token_type() const
+	{
+		return token_type_;
+	}
+	TokenType ParserEngine::token_type(const TokenType& token_type)
+	{
+		return token_type_ = token_type;
 	}
 
 	ParserEnginePtr make_parser_engine()

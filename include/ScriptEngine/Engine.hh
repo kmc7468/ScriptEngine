@@ -34,8 +34,14 @@ public:
 	TokenType token_type(const TokenType& token_type);
 
 public:
-	LexerEngine lexer_engine;
-	ParserEngine parser_engine;
+	const LexerEngine& lexer_engine() const;
+	LexerEngine& lexer_engine();
+	const ParserEngine& parser_engine() const;
+	ParserEngine& parser_engine();
+
+private:
+	LexerEngine lexer_engine_;
+	ParserEngine parser_engine_;
 };
 
 using EnginePtr = Engine::Ptr;

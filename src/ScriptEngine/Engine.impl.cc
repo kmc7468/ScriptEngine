@@ -39,16 +39,33 @@ namespace ScriptEngine
 
 		out << prefix(depth) << "Engine:\n";
 
-		lexer_engine.dump(depth + 1);
-		parser_engine.dump(depth + 1);
+		lexer_engine_.dump(depth + 1);
+		parser_engine_.dump(depth + 1);
 	}
 
 	TokenType Engine::token_type(const TokenType& token_type)
 	{
-		lexer_engine.token_type = token_type;
-		parser_engine.token_type = token_type;
+		lexer_engine_.token_type(token_type);
+		parser_engine_.token_type(token_type);
 
 		return token_type;
+	}
+
+	const LexerEngine& Engine::lexer_engine() const
+	{
+		return lexer_engine_;
+	}
+	LexerEngine& Engine::lexer_engine()
+	{
+		return lexer_engine_;
+	}
+	const ParserEngine& Engine::parser_engine() const
+	{
+		return parser_engine_;
+	}
+	ParserEngine& Engine::parser_engine()
+	{
+		return parser_engine_;
 	}
 
 	EnginePtr make_engine()

@@ -39,7 +39,16 @@ namespace ScriptEngine
 
 		out << prefix(depth) << "LexerEngine:\n";
 
-		token_type.dump(out, depth + 1);
+		token_type_.dump(out, depth + 1);
+	}
+
+	TokenType LexerEngine::token_type() const
+	{
+		return token_type_;
+	}
+	TokenType LexerEngine::token_type(const TokenType& token_type)
+	{
+		return token_type_ = token_type;
 	}
 
 	LexerEnginePtr make_lexer_engine()
