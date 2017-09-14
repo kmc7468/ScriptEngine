@@ -59,6 +59,39 @@ private:
 
 TokenType make_token_type();
 
+class Token final
+{
+public:
+	using IndexType = std::string::size_type;
+
+public:
+	Token(const TokenType& token_type);
+	Token(const TokenType& token_type, const std::string& sentence, IndexType line, IndexType col);
+	Token(const Token& token);
+	Token(Token&& token) noexcept;
+	~Token();
+
+public:
+	Token& operator=(const Token& token);
+	Token& operator=(Token&& token) noexcept;
+	bool operator==(const Token& token) const;
+	bool operator!=(const Token& token) const;
+
+public:
+	Token& assign(const Token& token);
+	Token& assign(Token&& token) noexcept;
+	bool equal(const Token& token) const;
+
+private:
+	TokenType token_type_;
+	std::string sentence_;
+
+	IndexType line_;
+	IndexType col_;
+	IndexType end_col_;
+		
+};
+
 SCRIPTENGINE_END
 
 #	endif
