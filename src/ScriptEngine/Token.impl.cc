@@ -176,3 +176,9 @@ namespace ScriptEngine
 		return TokenType::make();
 	}
 }
+
+namespace ScriptEngine
+{
+	Token::Token()
+	{}
+}

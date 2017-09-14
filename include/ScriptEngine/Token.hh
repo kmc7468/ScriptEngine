@@ -65,7 +65,7 @@ public:
 	using IndexType = std::string::size_type;
 
 public:
-	Token(const TokenType& token_type);
+	Token();
 	Token(const TokenType& token_type, const std::string& sentence, IndexType line, IndexType col);
 	Token(const Token& token);
 	Token(Token&& token) noexcept;
@@ -82,6 +82,13 @@ public:
 	Token& assign(Token&& token) noexcept;
 	bool equal(const Token& token) const;
 
+public:
+	TokenType token_type() const;
+	std::string sentence() const;
+	IndexType line() const noexcept;
+	IndexType col() const noexcept;
+	IndexType end_col() const noexcept;
+
 private:
 	TokenType token_type_;
 	std::string sentence_;
@@ -89,7 +96,6 @@ private:
 	IndexType line_;
 	IndexType col_;
 	IndexType end_col_;
-		
 };
 
 SCRIPTENGINE_END
