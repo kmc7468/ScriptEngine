@@ -69,15 +69,18 @@ public:
 	TokenTypeInst(const TokenType& token_type, std::vector<std::string>::size_type index);
 	TokenTypeInst(const TokenType& token_type, const std::string& member);
 	TokenTypeInst(const TokenTypeInst& token_type_inst);
+	TokenTypeInst(TokenTypeInst&& token_type_inst) noexcept;
 	~TokenTypeInst();
 
 public:
 	TokenTypeInst& operator=(const TokenTypeInst& token_type_inst);
+	TokenTypeInst& operator=(TokenTypeInst&& token_type_inst) noexcept;
 	bool operator==(const TokenTypeInst& token_type_inst) const;
 	bool operator!=(const TokenTypeInst& token_type_inst) const;
 
 public:
 	TokenTypeInst& assign(const TokenTypeInst& token_type_inst);
+	TokenTypeInst& assign(TokenTypeInst&& token_type_inst) noexcept;
 	TokenTypeInst& assign(const std::string& member);
 	TokenTypeInst& assign(std::vector<std::string>::size_type index);
 	bool equal(const TokenTypeInst& token_type_inst) const;
@@ -99,7 +102,7 @@ public:
 
 public:
 	Token();
-	Token(const TokenType& token_type, const std::string& sentence, IndexType line, IndexType col);
+	Token(const TokenTypeInst& token_type, const std::string& sentence, IndexType line, IndexType col);
 	Token(const Token& token);
 	Token(Token&& token) noexcept;
 	~Token();
@@ -116,19 +119,19 @@ public:
 	bool equal(const Token& token) const;
 
 public:
-	TokenType token_type() const;
+	TokenTypeInst token_type() const;
 	std::string sentence() const;
 	IndexType line() const noexcept;
 	IndexType col() const noexcept;
 	IndexType end_col() const noexcept;
 
 private:
-	TokenType token_type_;
+	TokenTypeInst token_type_;
 	std::string sentence_;
 
-	IndexType line_;
-	IndexType col_;
-	IndexType end_col_;
+	IndexType line_ = 0;
+	IndexType col_ = 0;
+	IndexType end_col_ = 0;
 };
 
 SCRIPTENGINE_END

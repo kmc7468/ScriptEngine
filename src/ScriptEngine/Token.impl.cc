@@ -214,12 +214,21 @@ namespace ScriptEngine
 	TokenTypeInst::TokenTypeInst(const TokenTypeInst& token_type_inst)
 		: token_type_(token_type_inst.token_type_), index_(token_type_inst.index_)
 	{}
+	TokenTypeInst::TokenTypeInst(TokenTypeInst&& token_type_inst) noexcept
+		: token_type_(std::move(token_type_inst.token_type_)), index_(token_type_inst.index_)
+	{
+		token_type_inst.index_ = 0;
+	}
 	TokenTypeInst::~TokenTypeInst()
 	{}
 
 	TokenTypeInst& TokenTypeInst::operator=(const TokenTypeInst& token_type_inst)
 	{
 		return assign(token_type_inst);
+	}
+	TokenTypeInst & TokenTypeInst::operator=(TokenTypeInst&& token_type_inst) noexcept
+	{
+		return assign(std::move(token_type_inst));
 	}
 	bool TokenTypeInst::operator==(const TokenTypeInst& token_type_inst) const
 	{
@@ -240,6 +249,22 @@ namespace ScriptEngine
 
 		return *this;
 	}
+	TokenTypeInst& TokenTypeInst::assign(TokenTypeInst&& token_type_inst) noexcept
+	{
+		if (token_type_ != token_type_inst.token_type_)
+		{
+			token_type_ = std::move(token_type_inst.token_type_);
+		}
+		else
+		{
+			token_type_inst.token_type_ = TokenType();
+		}
+
+		index_ = token_type_inst.index_;
+		token_type_inst.index_ = 0;
+
+		return *this;
+	}
 	TokenTypeInst& TokenTypeInst::assign(const std::string& member)
 	{
 		if (!token_type_.find(member))
@@ -247,6 +272,8 @@ namespace ScriptEngine
 
 		index_ = std::distance(token_type_.cbegin(),
 			std::find(token_type_.cbegin(), token_type_.cend(), member));
+
+		return *this;
 	}
 	TokenTypeInst& TokenTypeInst::assign(std::vector<std::string>::size_type index)
 	{
@@ -254,6 +281,8 @@ namespace ScriptEngine
 			throw std::out_of_range(u8"인수 'index'가 범위를 초과했습니다.");
 
 		index_ = index;
+
+		return *this;
 	}
 	bool TokenTypeInst::equal(const TokenTypeInst& token_type_inst) const
 	{
@@ -281,5 +310,89 @@ namespace ScriptEngine
 namespace ScriptEngine
 {
 	Token::Token()
+		: token_type_(TokenType())
 	{}
+	Token::Token(const TokenTypeInst& token_type, const std::string& sentence, IndexType line, IndexType col)
+		: token_type_(token_type), sentence_(sentence), line_(line), col_(col), end_col_(col + sentence.length() - 1)
+	{}
+	Token::Token(const Token& token)
+		: token_type_(token.token_type_), sentence_(token.sentence_), line_(token.line_), col_(token.col_), end_col_(token.end_col_)
+	{}
+	Token::Token(Token&& token) noexcept
+		: token_type_(std::move(token.token_type_)), sentence_(std::move(token.sentence_)), line_(token.line_), col_(token.col_), end_col_(token.end_col_)
+	{
+		token.line_ = 0;
+		token.col_ = 0;
+		token.end_col_ = 0;
+	}
+	Token::~Token()
+	{}
+
+	Token& Token::operator=(const Token& token)
+	{
+		return assign(token);
+	}
+	Token& Token::operator=(Token&& token) noexcept
+	{
+		return assign(std::move(token));
+	}
+	bool Token::operator==(const Token& token) const
+	{
+		return equal(token);
+	}
+	bool Token::operator!=(const Token& token) const
+	{
+		return !equal(token);
+	}
+
+	Token& Token::assign(const Token& token)
+	{
+		token_type_ = token.token_type_;
+		sentence_ = token.sentence_;
+		line_ = token.line_;
+		col_ = token.col_;
+		end_col_ = token.end_col_;
+
+		return *this;
+	}
+	Token& Token::assign(Token&& token) noexcept
+	{
+		token_type_ = std::move(token.token_type_);
+		sentence_ = std::move(token.sentence_);
+		line_ = token.line_;
+		col_ = token.col_;
+		end_col_ = token.end_col_;
+
+		token.line_ = 0;
+		token.col_ = 0;
+		token.end_col_ = 0;
+
+		return *this;
+	}
+	bool Token::equal(const Token& token) const
+	{
+		return token_type_ == token.token_type_ && sentence_ == token.sentence_ &&
+			line_ == token.line_ && col_ == token.col_ && end_col_ == token.end_col_;
+	}
+
+	TokenTypeInst Token::token_type() const
+	{
+		return token_type_;
+	}
+	std::string Token::sentence() const
+	{
+		return sentence_;
+	}
+	Token::IndexType Token::line() const noexcept
+	{
+		return line_;
+	}
+	Token::IndexType Token::col() const noexcept
+	{
+		return col_;
+	}
+	Token::IndexType Token::end_col() const noexcept
+	{
+		return end_col_;
+	}
 }
