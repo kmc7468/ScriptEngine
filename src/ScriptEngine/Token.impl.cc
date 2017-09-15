@@ -42,6 +42,10 @@ namespace ScriptEngine
 
 		return *this;
 	}
+	std::string TokenType::operator[](std::vector<std::string>::size_type index) const
+	{
+		return at(index);
+	}
 
 	TokenType& TokenType::assign(const TokenType& token_type)
 	{
@@ -75,6 +79,10 @@ namespace ScriptEngine
 		}
 
 		return true;
+	}
+	std::string TokenType::at(std::vector<std::string>::size_type index) const
+	{
+		return members_.at(index);
 	}
 
 	TokenType TokenType::make()
@@ -165,6 +173,10 @@ namespace ScriptEngine
 	{
 		return members_.cend();
 	}
+	std::vector<std::string>::size_type TokenType::size() const noexcept
+	{
+		return members_.size();
+	}
 
 	bool TokenType::empty() const noexcept
 	{
@@ -174,6 +186,95 @@ namespace ScriptEngine
 	TokenType make_token_type()
 	{
 		return TokenType::make();
+	}
+}
+
+namespace ScriptEngine
+{
+	TokenTypeInst::TokenTypeInst(const TokenType& token_type)
+		: token_type_(token_type)
+	{}
+	TokenTypeInst::TokenTypeInst(const TokenType& token_type, std::vector<std::string>::size_type index)
+		: token_type_(token_type), index_(index)
+	{
+		if (index <= token_type.size())
+			throw std::out_of_range(u8"인수 'index'가 범위를 초과했습니다.");
+	}
+	TokenTypeInst::TokenTypeInst(const TokenType& token_type, const std::string& member)
+		: token_type_(token_type)
+	{
+		std::vector<std::string>::const_iterator member_iter =
+			std::find(token_type.cbegin(), token_type.cend(), member);
+
+		if (member_iter == token_type.cend())
+			throw std::invalid_argument(u8"멤버를 찾지 못했습니다.");
+
+		index_ = std::distance(token_type.cbegin(), member_iter);
+	}
+	TokenTypeInst::TokenTypeInst(const TokenTypeInst& token_type_inst)
+		: token_type_(token_type_inst.token_type_), index_(token_type_inst.index_)
+	{}
+	TokenTypeInst::~TokenTypeInst()
+	{}
+
+	TokenTypeInst& TokenTypeInst::operator=(const TokenTypeInst& token_type_inst)
+	{
+		return assign(token_type_inst);
+	}
+	bool TokenTypeInst::operator==(const TokenTypeInst& token_type_inst) const
+	{
+		return equal(token_type_inst);
+	}
+	bool TokenTypeInst::operator!=(const TokenTypeInst& token_type_inst) const
+	{
+		return !equal(token_type_inst);
+	}
+
+	TokenTypeInst& TokenTypeInst::assign(const TokenTypeInst& token_type_inst)
+	{
+		if (token_type_ != token_type_inst.token_type_)
+		{
+			token_type_ = token_type_inst.token_type_;
+		}
+		index_ = token_type_inst.index_;
+
+		return *this;
+	}
+	TokenTypeInst& TokenTypeInst::assign(const std::string& member)
+	{
+		if (!token_type_.find(member))
+			throw std::invalid_argument(u8"멤버를 찾지 못했습니다.");
+
+		index_ = std::distance(token_type_.cbegin(),
+			std::find(token_type_.cbegin(), token_type_.cend(), member));
+	}
+	TokenTypeInst& TokenTypeInst::assign(std::vector<std::string>::size_type index)
+	{
+		if (token_type_.size() <= index)
+			throw std::out_of_range(u8"인수 'index'가 범위를 초과했습니다.");
+
+		index_ = index;
+	}
+	bool TokenTypeInst::equal(const TokenTypeInst& token_type_inst) const
+	{
+		return token_type_ == token_type_inst.token_type_ && index_ == token_type_inst.index_;
+	}
+
+	std::string TokenTypeInst::selected() const
+	{
+		return token_type_[index_];
+	}
+	std::string TokenTypeInst::selected(const std::string& member)
+	{
+		assign(member);
+
+		return selected();
+	}
+	std::string TokenTypeInst::selected(std::vector<std::string>::size_type index)
+	{
+		assign(index);
+		
+		return selected();
 	}
 }
 

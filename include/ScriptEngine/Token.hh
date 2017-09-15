@@ -24,11 +24,13 @@ public:
 	bool operator==(const TokenType& token_type) const;
 	bool operator!=(const TokenType& token_type) const;
 	TokenType& operator[](const std::string& new_member);
+	std::string operator[](std::vector<std::string>::size_type index) const;
 
 public:
 	TokenType& assign(const TokenType& token_type);
 	TokenType& assign(TokenType&& token_type) noexcept;
 	bool equal(const TokenType& token_type) const;
+	std::string at(std::vector<std::string>::size_type index) const;
 
 public:
 	static TokenType make();
@@ -42,13 +44,14 @@ public:
 	void push_back(const std::string& new_member);
 	void erase(const std::string& member);
 	bool find(const std::string& member) const;
-	
+
 	iterator begin();
 	const_iterator begin() const;
 	iterator end();
 	const_iterator end() const;
 	const_iterator cbegin() const;
 	const_iterator cend() const;
+	std::vector<std::string>::size_type size() const noexcept;
 
 public:
 	bool empty() const noexcept;
@@ -58,6 +61,36 @@ private:
 };
 
 TokenType make_token_type();
+
+class TokenTypeInst final
+{
+public:
+	explicit TokenTypeInst(const TokenType& token_type);
+	TokenTypeInst(const TokenType& token_type, std::vector<std::string>::size_type index);
+	TokenTypeInst(const TokenType& token_type, const std::string& member);
+	TokenTypeInst(const TokenTypeInst& token_type_inst);
+	~TokenTypeInst();
+
+public:
+	TokenTypeInst& operator=(const TokenTypeInst& token_type_inst);
+	bool operator==(const TokenTypeInst& token_type_inst) const;
+	bool operator!=(const TokenTypeInst& token_type_inst) const;
+
+public:
+	TokenTypeInst& assign(const TokenTypeInst& token_type_inst);
+	TokenTypeInst& assign(const std::string& member);
+	TokenTypeInst& assign(std::vector<std::string>::size_type index);
+	bool equal(const TokenTypeInst& token_type_inst) const;
+
+public:
+	std::string selected() const;
+	std::string selected(const std::string& member);
+	std::string selected(std::vector<std::string>::size_type index);
+
+private:
+	TokenType token_type_;
+	std::vector<std::string>::size_type index_ = 0;
+};
 
 class Token final
 {
